@@ -6,8 +6,10 @@
     </head>
     <body>
         <?php
+            //muestra el mensaje
             echo $mensaje;
         ?>
-         <p><a href="proceso_inicio_sesion.php">Iniciar Sesión</a></p>
+        <!-- enlace para listar a los profesores -->
+         <p><a href="proceso_listar_profesores.php">Listar Profesores</a></p>
     </body>
 </html>

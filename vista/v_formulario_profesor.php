@@ -5,6 +5,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+        <!-- Formulario para añadir profesores -->
         <h3>Alta de profesores</h3>
         <form action="proceso_nuevo_profesor.php" method="post">
             <label for="nombre">Nombre del profesor/a: </label>

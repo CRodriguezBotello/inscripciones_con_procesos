@@ -5,68 +5,43 @@
         public $mensaje;
         private $conexion;
 
+        //metodo construct
         public function __construct(){
 
             $this->conexion= new mysqli(SERVIDOR,USUARIO,PASSWORD,BBDD);
             $this->conexion->set_charset('utf8');
         }
-
+            // Metodo para añadir al administrador
         public function alta_admin($nombre,$correo,$pw){
-            $sql= 'INSERT INTO usuarios (nombre, correo, pw, perfil) VALUES ("'.$nombre.'","'.$correo.'","'.$pw.'","A");';
 
+            $sql= 'INSERT INTO usuarios (nombre, correo, pw, perfil) VALUES ("'.$nombre.'","'.$correo.'","'.$pw.'","A");';
+                //ejecutamos la consulta            
             $resultado=$this->conexion->query($sql);
             if($resultado){
+                //mensaje de exito
                 $this->mensaje="Nuevo administrador añadido";
             }else{
+                //mensaje de error
                 $this->mensaje="No se ha podido dar de alta el administrador";
             }
-
+            //devolvemos el mensaje
             return $this->mensaje;
         }
 
+        //metodo para comprobar si los datos de la sesion que hemos puesto existen en la base de datos
          public function iniciar_sesion($correo,$pw){
             $sql="SELECT * FROM usuarios WHERE correo='$correo'";
 
             $resultado=$this->conexion->query($sql);
             if($resultado->num_rows > 0){
+                //si el usuario existe, devuelve los datos del usuario
                 $usuario = $resultado->fetch_assoc();
                 return $usuario;
             }else{
+                //mensaje de error
                 $this->mensaje="Fallo al enviar formulario";
             }
-
-            return $this->mensaje;
-        }
-
-        
-        public function listar_etapas(){
-
-            $sql= "SELECT idEtapa,nombre FROM etapas";
-            $resultado=$this->conexion->query($sql);
-
-            $Etapas=[];
-            if ($resultado->num_rows > 0) {
-                while($fila=$resultado->fetch_assoc()){
-                    
-                    $Etapas[$fila["idEtapa"]]=$fila["nombre"];
-                }
-            }else{
-                exit('No hay filas en la tabla de Etapas');
-            }
-            return $Etapas;
-        }
-
-        public function nueva_clase($codigo,$tutor,$etapa){
-           $sql="INSERT INTO clases (codigo, idTutor, idEtapa) VALUES ('$codigo','$tutor','$etapa')";
-
-           $resultado=$this->conexion->query($sql);
-
-           if($resultado){
-                $this->mensaje="Nueva clase añadida";
-            }else{
-                $this->mensaje="No se ha podido añadir la clase";
-            }
-
+            //devuelve el mensaje
             return $this->mensaje;
         }
     }

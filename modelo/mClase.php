@@ -5,27 +5,30 @@
         public $mensaje;
         private $conexion;
 
+        //metodo construct
         public function __construct(){
 
             $this->conexion= new mysqli(SERVIDOR,USUARIO,PASSWORD,BBDD);
             $this->conexion->set_charset('utf8');
         }
 
-        public function listar_etapas(){
+        //metodo para añadir la clase a la base de datos
+        public function nueva_clase($codigo,$tutor,$etapa){
+           $sql="INSERT INTO clases (codigo, idTutor, idEtapa) VALUES ('$codigo','$tutor','$etapa')";
 
-            $sql= "SELECT idEtapa,nombre FROM etapas";
-            $resultado=$this->conexion->query($sql);
+           //ejecutamos la consulta
+           $resultado=$this->conexion->query($sql);
 
-            $Etapas=[];
-            if ($resultado->num_rows > 0) {
-                while($fila=$resultado->fetch_assoc()){
-                    
-                    $Etapas[$fila["idEtapa"]]=$fila["nombre"];
-                }
+           if($resultado){
+                //mensaje de exito
+                $this->mensaje="Nueva clase añadida";
             }else{
-                exit('No hay filas en la tabla de Etapas');
+                //mensaje de error
+                $this->mensaje="No se ha podido añadir la clase";
             }
-            return $Etapas;
+
+            //devuelve el mensaje
+            return $this->mensaje;
         }
     }
 ?>

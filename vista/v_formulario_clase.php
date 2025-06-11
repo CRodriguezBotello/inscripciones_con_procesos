@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Alta de Alumnos</title>
+        <title>Alta de Clases</title>
         <meta charset="utf-8">
     </head>
     <body>
-        <h3>Dar de alta un alumno</h3>
+        <!-- //formulario para añadir clases -->
+        <h3>Dar de alta una clase</h3>
         <form action="proceso_nueva_clase.php" method="post">
             <label for="codigo">Código de la clase: </label><br>
             <input type="text" name="codigo">

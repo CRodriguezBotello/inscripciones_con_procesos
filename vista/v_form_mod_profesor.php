@@ -6,6 +6,7 @@
     <title>Modificar Profesor</title>
 </head>
 <body>
+    <!-- Formulario para modificar al profesor -->
     <h1>Modificando al profesor <?php echo $Profesor["nombre"]?></h1>
     <form action="proceso_actualizar_profesor.php" method="post">
         

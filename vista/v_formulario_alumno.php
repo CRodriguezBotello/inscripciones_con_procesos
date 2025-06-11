@@ -5,6 +5,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+        <!-- Formulario para añadir alumnos -->
         <h3>Dar de alta un alumno</h3>
         <form action="proceso_nuevo_alumno.php" method="post">
             <label for="nombre">Nombre del alumno: </label><br>

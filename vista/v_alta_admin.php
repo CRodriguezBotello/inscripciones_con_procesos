@@ -5,6 +5,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+        <!-- Formulario para añadir administrador -->
         <h3>Nuevo Admin</h3>
         <form action="proceso_alta_admin.php" method="post">
             <label for="nombre">Nombre: </label>

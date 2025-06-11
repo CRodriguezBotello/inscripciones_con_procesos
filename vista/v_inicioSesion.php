@@ -5,6 +5,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+        <!-- Formulario para iniciar sesión como administrador o como profesor -->
         <h3>Inicio Sesion</h3>
         <p>Ya hay un admin dado de alta</p>
         <form action="proceso_nueva_sesion.php" method="post">
