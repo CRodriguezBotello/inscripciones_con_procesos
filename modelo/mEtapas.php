@@ -15,7 +15,7 @@
         //metodo para listar las etapas que hay en la base de datos
         public function listar_etapas(){
 
-            $sql= "SELECT idEtapa,nombre FROM etapas";
+            $sql= "SELECT * FROM etapas";
             //ejecutamos la consulta
             $resultado=$this->conexion->query($sql);
 
@@ -24,7 +24,7 @@
                 //mete las etapas que hayamos recogido con la consulta en la variable $etapas
                 while($fila=$resultado->fetch_assoc()){
                     
-                    $Etapas[$fila["idEtapa"]]=$fila["nombre"];
+                    $Etapas[]=$fila;
                 }
             }else{
                 //mensaje de error
@@ -32,6 +32,25 @@
             }
             //devuelve las etapas
             return $Etapas;
+        }
+
+        //metodo para añadir etapas a la base de datos
+        public function insertar_etapa($nombre){
+           $sql="INSERT INTO etapas (nombre) VALUES ('$nombre')";
+
+           //ejecutamos la consulta
+           $resultado=$this->conexion->query($sql);
+
+           if($resultado){
+                //mensaje de exito
+                $this->mensaje="Nueva etapa añadida";
+            }else{
+                //mensaje de error
+                $this->mensaje="No se ha podido añadir la etapa";
+            }
+
+            //devuelve el mensaje
+            return $this->mensaje;
         }
 
         

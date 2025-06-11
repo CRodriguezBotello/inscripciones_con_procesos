@@ -141,5 +141,52 @@
             return $this->mensaje;
         }
 
+        public function listar_alumnos_actividades($idProfesor, $idActividad){
+            $sql = "SELECT actividades.idActividad, actividades.nombre AS nombre_actividad, actividades.max_al_clases, alumnos.nombre AS nombre_alumno, alumnos.idAlumno 
+                    FROM actividades
+                    INNER JOIN actividades_etapas ON actividades.idActividad = actividades_etapas.idActividad
+                    INNER JOIN clases ON actividades_etapas.idEtapa = clases.idEtapa
+                    INNER JOIN alumnos ON clases.idClase = alumnos.idClase
+                    WHERE actividades.idActividad = $idActividad
+                    AND clases.idTutor = $idProfesor";
+        
+            $resultado = $this->conexion->query($sql);
+        
+            // Creamos un array vacio para guardar el $resultado
+            $datos = [];
+        
+            if ($resultado->num_rows > 0) {
+                // Recorre cada fila del resultado y la mete en el array, habra tantas filas como alumnos haya en esa clase
+                while ($fila = $resultado->fetch_assoc()) {
+                    $datos[] = $fila;
+                }
+                // Devuelve el array
+                return $datos;
+            } else {
+                //mensaje de error;
+                $this->mensaje= "No se pudo obtener la clase";
+                return $this->mensaje;
+            }
+        }
+
+        //metodo para inscribir lo alumnos con las actividades
+        public function inscripcion_alumnos($idActividad,$alumno){
+            $sql="INSERT INTO inscripciones (idAlumno, idActividad) VALUES ($alumno,$idActividad)";
+
+            //ejecutamos la consulta
+            $resultado=$this->conexion->query($sql);
+
+            if($resultado){
+                //mensaje de exito
+                $this->mensaje="Alumnos inscritos correctamente";
+            }else{
+                //mensaje de error
+                $this->mensaje="Fallo al inscribir";
+            }
+
+            //devolvemos el mensaje
+            return $this->mensaje;
+        }
+
     }
 ?>

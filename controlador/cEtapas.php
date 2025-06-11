@@ -11,5 +11,22 @@
             $datos=$objEtapas->listar_etapas();
             return $datos;
         }
+
+        //metodo para añadir las clases a la base de datos
+        public function insertar_etapa(){
+            if(!empty($_POST['nombre'])){
+                //comprobamos que hemos añadido el codigo de la clase
+                $nombre=$_POST['nombre'];
+
+                //Llamada al modelo para añadir la clase
+                $objEtapas= new MEtapas();
+                $this->mensaje=$objEtapas->insertar_etapa($nombre);
+            }else{
+                //mensaje de error
+                $this->mensaje="Falta el nombre de la etapa";
+            }
+            //devolvemos el mensaje
+            return $this->mensaje;
+        }
     }
 ?>

@@ -165,6 +165,55 @@
             //devuelve el mensaje
             return $this->mensaje;
         }
+
+        //metodo para 
+        public function listar_alumnos_actividades(){
+            if(!empty($_GET['id'])){
+                //comprobamos que hemos añadido el id
+                $idActividad=$_GET['id'];
+
+                if(!empty($_GET['idProfesor'])){
+                    //comprobamos que hemos añadido el id del profesor
+                    $idProfesor=$_GET['idProfesor'];
+
+                    //llamada al metodo del modelo para inscribir los alumnos
+                    $objModelo=new MProfesor();
+                    $datos=$objModelo->listar_alumnos_actividades($idProfesor,$idActividad);
+                }  
+            }
+
+            //devolvemos los datos
+            return $datos;
+        }
+
+        //metodo para inscribir a los alumnos
+        public function inscripcion_alumnos(){
+            if(!empty($_POST['id'])){
+                //comprobamos que hemos añadido el id del profesor
+                $idActividad=$_POST['id'];
+
+                if(isset($_POST['alumnos']) && !empty($_POST['alumnos'])){
+                    //comprobamos que hemos añadido los alumnos
+                    $alumnos=$_POST['alumnos'];
+
+                    $objModelo=new MProfesor();
+                    foreach($alumnos as $alumno){ //inscribe al alumno en la actividad si no está vacío
+                        if(!empty($alumno)){
+                            $this->mensaje=$objModelo->inscripcion_alumnos($idActividad,$alumno);
+                        }
+                    }
+                    
+                }else{
+                    //mensaje de error
+                    $this->mensaje="Debe seleccionar al menos un alumno";
+                }
+            }else{
+                //mensaje de error
+                $this->mensaje="Error al obtener la actividad";
+            }
+
+            return $this->mensaje;
+        }
         
     }
 ?>
