@@ -11,6 +11,24 @@
             $this->conexion= new mysqli(SERVIDOR,USUARIO,PASSWORD,BBDD);
             $this->conexion->set_charset('utf8');
         }
+
+        //metodo para buscar si hay administradores en la base de
+        public function buscar_admin(){
+
+            $sql="SELECT * FROM usuarios WHERE perfil='A';";
+            //ejecutamos la consulta
+            $resultado=$this->conexion->query($sql);
+
+            if($resultado->num_rows > 0){
+                //si el profesor es tutor, devuelve los datos
+                $admin=true;
+            }else{
+                //mensaje de error
+                $admin=false;
+            }
+                //devuelve el valor de admin
+                return $admin;
+        }
             // Metodo para añadir al administrador
         public function alta_admin($nombre,$correo,$pw){
 

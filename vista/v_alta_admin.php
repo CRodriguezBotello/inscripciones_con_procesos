@@ -5,6 +5,12 @@
         <meta charset="utf-8">
     </head>
     <body>
+
+        <?php
+            if (isset($mensaje)) {
+                echo $mensaje;
+            }
+        ?>
         <!-- Formulario para añadir administrador -->
         <h3>Nuevo Admin</h3>
         <form action="proceso_alta_admin.php" method="post">

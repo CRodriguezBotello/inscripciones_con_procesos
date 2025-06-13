@@ -7,6 +7,16 @@
         public $correo;
         public $pw;
 
+        //metodo para buscar si hay administradores
+        public function buscar_admin(){
+
+                $objAdmin= new MAdmin();
+                $admin=$objAdmin->buscar_admin();
+
+                // devuelve el tutor
+                return $admin;
+            }
+
             // Metodo para añadir administradores a la BBDD        
         public function insertar_admin(){
             if(!empty($_POST['nombre'])){
